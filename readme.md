@@ -10,7 +10,7 @@ First, pull in the package through Composer.
 }
 ```
 
-And then include the service provider within `app/config/app.php`.
+And then, if using Laravel, include the service provider within `app/config/app.php`.
 
 ```php
 'providers' => [
@@ -18,7 +18,7 @@ And then include the service provider within `app/config/app.php`.
 ];
 ```
 
-Also, for convenience, add a facade alias to this same file at the bottom:
+And, for convenience, add a facade alias to this same file at the bottom:
 
 ```php
 'aliases' => [
@@ -39,12 +39,71 @@ public function store()
 }
 ```
 
-That's it! Without that message flashed to the session, you may now display it in your view(s).
-
-You can also do:
+You may also do:
 
 - `Flash::success('Message')`
 - `Flash::error('Message')`
 - `Flash::overlay('Message')`
 
+Again, if using Laravel, this will set two keys in the session:
 
+- 'flash_notification.message' - The message you're flashing
+- 'flash_notification.level' - A string that represents the type of notification (good for applying HTML class names)
+
+With this message flashed to the session, you may now display it in your view(s). Maybe something like:
+
+```html
+@if (Session::has('flash_notification.message'))
+    <div class="alert alert-{{ Session::get('flash_notification.level') }}">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+
+        {{ Session::get('flash_notification.message') }}
+    </div>
+@endif
+```
+
+> Note that this package is optimized for use with Twitter Bootstrap.
+
+Because flash messages and overlays are so common, if you want, you may use (or modify) the views that are included with this package. Simply do:
+
+```html
+@include('flash::message')
+```
+
+## Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    @include('flash::flash')
+
+    <p>Welcome to my website...</p>
+</div>
+
+<script src="//code.jquery.com/jquery.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<!-- This is only necessary if you do Flash::overlay('...') -->
+<script>
+    $('#flash-overlay-modal').modal();
+</script>
+
+</body>
+</html>
+```
+
+If you need to modify the flash message partials, you can run:
+
+```bash
+php artisan view:publish laracasts/flash
+```
+
+The two package views will now be located in the `app/views/packages/laracasts/flash/' directory.
