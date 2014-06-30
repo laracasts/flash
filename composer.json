@@ -1,0 +1,23 @@
+{
+    "name": "laracasts/flash",
+    "description": "",
+    "authors": [
+        {
+            "name": "Jeffrey Way",
+            "email": "jeffrey@laracasts.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.1.*"
+    },
+    "require-dev": {
+        "mockery/mockery": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "Laracasts\\Flash": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
