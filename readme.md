@@ -14,7 +14,7 @@ And then, if using Laravel, include the service provider within `app/config/app.
 
 ```php
 'providers' => [
-    'Laracasts\Flash\FlashServiceProvider
+    'Laracasts\Flash\FlashServiceProvider'
 ];
 ```
 
@@ -64,7 +64,7 @@ With this message flashed to the session, you may now display it in your view(s)
 
 > Note that this package is optimized for use with Twitter Bootstrap.
 
-Because flash messages and overlays are so common, if you want, you may use (or modify) the views that are included with this package. Simply do:
+Because flash messages and overlays are so common, if you want, you may use (or modify) the views that are included with this package. Simply append to your layout view:
 
 ```html
 @include('flash::message')
@@ -83,7 +83,7 @@ Because flash messages and overlays are so common, if you want, you may use (or 
 <body>
 
 <div class="container">
-    @include('flash::flash')
+    @include('flash::message')
 
     <p>Welcome to my website...</p>
 </div>
@@ -107,3 +107,30 @@ php artisan view:publish laracasts/flash
 ```
 
 The two package views will now be located in the `app/views/packages/laracasts/flash/' directory.
+
+```php
+Flash::message('Welcome aboard!');
+
+return Redirect::home();
+```
+
+![https://dl.dropboxusercontent.com/u/774859/GitHub-Repos/flash/message.png](https://dl.dropboxusercontent.com/u/774859/GitHub-Repos/flash/message.png)
+
+```php
+Flash::error('Sorry Please try again.');
+
+return Redirect::home();
+```
+
+![https://dl.dropboxusercontent.com/u/774859/GitHub-Repos/flash/error.png](https://dl.dropboxusercontent.com/u/774859/GitHub-Repos/flash/error.png)
+
+```php
+Flash::overlay('You are now a Laracasts member!');
+
+return Redirect::home();
+```
+
+![https://dl.dropboxusercontent.com/u/774859/GitHub-Repos/flash/overlay.png](https://dl.dropboxusercontent.com/u/774859/GitHub-Repos/flash/overlay.png)
+
+> [Learn exactly how to build this very package on Laracasts!](https://laracasts.com/lessons/flexible-flash-messages)
+
