@@ -25,7 +25,7 @@ class FlashServiceProvider extends ServiceProvider {
 
         $this->app->bindShared('flash', function()
         {
-            return $this->app->make('Acme\Notifications\FlashNotifier');
+            return $this->app->make('Laracasts\Flash\FlashNotifier');
         });
     }
 
