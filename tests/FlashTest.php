@@ -42,6 +42,7 @@ class FlashTest extends PHPUnit_Framework_TestCase {
         $this->flash->error('Uh Oh');
 	}
 
+    /** @test */
     public function it_displays_warning_flash_notifications() 
     {
         $this->session->shouldReceive('flash')->with('flash_notification.message', 'Be careful!');
