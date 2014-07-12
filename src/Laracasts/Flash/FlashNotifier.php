@@ -34,6 +34,14 @@ class FlashNotifier {
     /**
      * @param $message
      */
+    public function warning($message)
+    {
+        $this->message($message, 'warning');
+    }
+
+    /**
+     * @param $message
+     */
     public function overlay($message)
     {
         $this->message($message);
