@@ -43,6 +43,7 @@ You may also do:
 
 - `Flash::success('Message')`
 - `Flash::error('Message')`
+- `Flash::warning('Message')`
 - `Flash::overlay('Message')`
 
 Again, if using Laravel, this will set two keys in the session:
