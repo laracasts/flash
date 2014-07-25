@@ -43,6 +43,7 @@ You may also do:
 
 - `Flash::success('Message')`
 - `Flash::error('Message')`
+- `Flash::warning('Message')`
 - `Flash::overlay('Message')`
 
 Again, if using Laravel, this will set two keys in the session:
@@ -55,7 +56,7 @@ With this message flashed to the session, you may now display it in your view(s)
 ```html
 @if (Session::has('flash_notification.message'))
     <div class="alert alert-{{ Session::get('flash_notification.level') }}">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 
         {{ Session::get('flash_notification.message') }}
     </div>
