@@ -44,9 +44,9 @@ You may also do:
 - `Flash::success('Message')`
 - `Flash::error('Message')`
 - `Flash::warning('Message')`
-- `Flash::overlay('Message')`
+- `Flash::overlay('Modal Message', 'Modal Title')`
 
-Again, if using Laravel, this will set two keys in the session:
+Again, if using Laravel, this will set three keys in the session:
 
 - 'flash_notification.message' - The message you're flashing
 - 'flash_notification.level' - A string that represents the type of notification (good for applying HTML class names)
