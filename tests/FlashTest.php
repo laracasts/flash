@@ -25,7 +25,17 @@ class FlashTest extends PHPUnit_Framework_TestCase {
         $this->flash->message('Welcome Aboard');
 	}
 
-	///** @test */
+    /** @test */
+    public function it_displays_info_flash_notifications()
+    {
+        $this->session->shouldReceive('flash')->with('flash_notification.message', 'Welcome Aboard');
+        $this->session->shouldReceive('flash')->with('flash_notification.title', 'Notice');
+        $this->session->shouldReceive('flash')->with('flash_notification.level', 'info');
+
+        $this->flash->info('Welcome Aboard');
+    }
+
+	/** @test */
 	public function it_displays_success_flash_notifications()
 	{
         $this->session->shouldReceive('flash')->with('flash_notification.message', 'Welcome Aboard');
