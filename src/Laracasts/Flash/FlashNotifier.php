@@ -19,6 +19,15 @@ class FlashNotifier {
      * @param $message
      * @param $title
      */
+    public function info($message)
+    {
+        $this->message($message, 'info');
+    }
+
+    /**
+     * @param $message
+     * @param $title
+     */
     public function success($message)
     {
         $this->message($message, 'success');
