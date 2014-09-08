@@ -41,7 +41,7 @@ public function store()
 
 You may also do:
 
-- 'Flash::info('Message')`
+- `Flash::info('Message')`
 - `Flash::success('Message')`
 - `Flash::error('Message')`
 - `Flash::warning('Message')`
