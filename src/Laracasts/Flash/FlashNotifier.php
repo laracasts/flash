@@ -19,36 +19,36 @@ class FlashNotifier {
      * @param $message
      * @param $title
      */
-    public function info($message)
+    public function info($message, $title = 'Info')
     {
-        $this->message($message, 'info');
+        $this->message($message, 'info', $title);
     }
 
     /**
      * @param $message
      * @param $title
      */
-    public function success($message)
+    public function success($message, $title = 'Success')
     {
-        $this->message($message, 'success');
+        $this->message($message, 'success', $title);
     }
 
     /**
      * @param $message
      * @param $title
      */
-    public function error($message)
+    public function error($message, $title = 'Error')
     {
-        $this->message($message, 'danger');
+        $this->message($message, 'danger', $title);
     }
 
     /**
      * @param $message
      * @param $title
      */
-    public function warning($message)
+    public function warning($message, $title = 'Warning')
     {
-        $this->message($message, 'warning');
+        $this->message($message, 'warning', $title);
     }
 
     /**
@@ -70,6 +70,7 @@ class FlashNotifier {
     {
         $this->session->flash('flash_notification.message', $message);
         $this->session->flash('flash_notification.level', $level);
+        $this->session->flash('flash_notification.title', $title);
     }
 
 }
