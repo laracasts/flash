@@ -124,6 +124,15 @@ php artisan view:publish laracasts/flash
 The two package views will now be located in the `app/views/packages/laracasts/flash/' directory.
 
 ```php
+Flash::error($validator->messages()); 
+
+return Redirect::register();
+```
+
+![https://www.diigo.com/file/image/eddpscezcecaobsabzbpcasdao/Flash+Package.jpg](https://www.diigo.com/file/image/eddpscezcecaobsabzbpcasdao/Flash+Package.jpg)
+
+
+```php
 Flash::message('Welcome aboard!');
 
 return Redirect::home();
