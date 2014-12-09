@@ -129,7 +129,7 @@ Flash::error($validator->messages());
 return Redirect::register();
 ```
 
-![https://www.diigo.com/file/image/eddpscezcecaobsabzbpcasdao/Flash+Package.jpg](https://www.diigo.com/file/image/eddpscezcecaobsabzbpcasdao/Flash+Package.jpg)
+![https://cloud.githubusercontent.com/assets/3633772/5359160/e2002470-7fc3-11e4-84f2-dfaa0c0a634b.png](https://cloud.githubusercontent.com/assets/3633772/5359160/e2002470-7fc3-11e4-84f2-dfaa0c0a634b.png)
 
 
 ```php
