@@ -38,6 +38,19 @@ public function store()
     return Redirect::home();
 }
 ```
+Within your controller , you can also pass laravel validation errors as array 
+
+```php
+$validator = Validator::make(Input::all(), User::$rules);
+ 
+if ($validator->passes()) {
+    // validation has passed, save user in DB
+} else {
+    // validation has failed, display error messages   
+     Flash::error($validator->messages()); 
+}
+
+```
 
 You may also do:
 
