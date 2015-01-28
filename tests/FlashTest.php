@@ -22,7 +22,7 @@ class FlashTest extends PHPUnit_Framework_TestCase {
         $this->session->shouldReceive('flash')->with('flash_notification.title', 'Notice');
         $this->session->shouldReceive('flash')->with('flash_notification.level', 'info');
 
-        $this->flash->message('Welcome Aboard');
+        $this->flash->message('Welcome Aboard', 'info', 'Notice');
 	}
 
     /** @test */
@@ -32,7 +32,7 @@ class FlashTest extends PHPUnit_Framework_TestCase {
         $this->session->shouldReceive('flash')->with('flash_notification.title', 'Notice');
         $this->session->shouldReceive('flash')->with('flash_notification.level', 'info');
 
-        $this->flash->info('Welcome Aboard');
+        $this->flash->info('Welcome Aboard', 'Notice');
     }
 
 	/** @test */
@@ -42,7 +42,7 @@ class FlashTest extends PHPUnit_Framework_TestCase {
         $this->session->shouldReceive('flash')->with('flash_notification.title', 'Notice');
         $this->session->shouldReceive('flash')->with('flash_notification.level', 'success');
 
-		$this->flash->success('Welcome Aboard');
+		$this->flash->success('Welcome Aboard', 'Notice');
 	}
 
 	/** @test */
@@ -52,7 +52,7 @@ class FlashTest extends PHPUnit_Framework_TestCase {
         $this->session->shouldReceive('flash')->with('flash_notification.title', 'Notice');
         $this->session->shouldReceive('flash')->with('flash_notification.level', 'danger');
 
-        $this->flash->error('Uh Oh');
+        $this->flash->error('Uh Oh', 'Notice');
 	}
 
     /** @test */
@@ -62,7 +62,7 @@ class FlashTest extends PHPUnit_Framework_TestCase {
         $this->session->shouldReceive('flash')->with('flash_notification.title', 'Notice');
         $this->session->shouldReceive('flash')->with('flash_notification.level', 'warning');
 
-        $this->flash->warning('Be careful!');
+        $this->flash->warning('Be careful!', 'Notice');
     }
 
     /** @test */
