@@ -2,7 +2,8 @@
 
 use Illuminate\Support\ServiceProvider;
 
-class FlashServiceProvider extends ServiceProvider {
+class FlashServiceProvider extends ServiceProvider
+{
 
     /**
      * Indicates if loading of the provider is deferred.
@@ -23,8 +24,7 @@ class FlashServiceProvider extends ServiceProvider {
             'Laracasts\Flash\LaravelSessionStore'
         );
 
-        $this->app->bindShared('flash', function()
-        {
+        $this->app->bindShared('flash', function () {
             return $this->app->make('Laracasts\Flash\FlashNotifier');
         });
     }
@@ -36,20 +36,11 @@ class FlashServiceProvider extends ServiceProvider {
      */
     public function boot()
     {
-        $this->loadViewsFrom('flash', __DIR__.'/../../views');
-        $this->publishes([
-            __DIR__.'/../../views' => config('view.paths')[0].'/vendor/flash',
-        ]);
-    }
+        $this->loadViewsFrom(__DIR__ . '/../../views', 'flash');
 
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return ['flash'];
+        $this->publishes([
+            __DIR__ . '/../../views' => base_path('resources/views/vendor/flash')
+        ]);
     }
 
 }
