@@ -64,11 +64,13 @@ public function destroy()
 {
     Auth::logout();
 
-    flash()->info('You have been logged out.');
+    flash()->success('You have been logged out.');
 
     return home();
 }
 ```
+
+Or, for a general information flash, just do: `flash('Some message');`.
 
 With this message flashed to the session, you may now display it in your view(s). Maybe something like:
 
