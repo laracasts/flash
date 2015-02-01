@@ -1,13 +1,18 @@
 <?php namespace Laracasts\Flash;
 
-class FlashNotifier {
+class FlashNotifier
+{
 
     /**
+     * The session writer.
+     *
      * @var SessionStore
      */
     private $session;
 
     /**
+     * Create a new flash notifier instance.
+     *
      * @param SessionStore $session
      */
     function __construct(SessionStore $session)
@@ -16,8 +21,9 @@ class FlashNotifier {
     }
 
     /**
-     * @param $message
-     * @param $title
+     * Flash an information message.
+     *
+     * @param string $message
      */
     public function info($message)
     {
@@ -25,8 +31,9 @@ class FlashNotifier {
     }
 
     /**
-     * @param $message
-     * @param $title
+     * Flash a success message.
+     *
+     * @param string $message
      */
     public function success($message)
     {
@@ -34,8 +41,9 @@ class FlashNotifier {
     }
 
     /**
-     * @param $message
-     * @param $title
+     * Flash an error message.
+     *
+     * @param string $message
      */
     public function error($message)
     {
@@ -43,8 +51,9 @@ class FlashNotifier {
     }
 
     /**
-     * @param $message
-     * @param $title
+     * Flash a warning message.
+     *
+     * @param string $message
      */
     public function warning($message)
     {
@@ -52,21 +61,26 @@ class FlashNotifier {
     }
 
     /**
-     * @param $message
-     * @param $title
+     * Flash an overlay modal.
+     *
+     * @param string $message
+     * @param string $title
      */
     public function overlay($message, $title = 'Notice')
     {
         $this->message($message, 'info', $title);
+
         $this->session->flash('flash_notification.overlay', true);
         $this->session->flash('flash_notification.title', $title);
     }
 
     /**
-     * @param $message
+     * Flash a general message.
+     *
+     * @param string $message
      * @param string $level
      */
-    public function message($message, $level = 'info', $title = 'Notice')
+    public function message($message, $level = 'info')
     {
         $this->session->flash('flash_notification.message', $message);
         $this->session->flash('flash_notification.level', $level);
