@@ -5,11 +5,18 @@ if ( ! function_exists('flash')) {
     /**
      * Arrange for a flash message.
      *
+     * @param  string|null $message
      * @return \Laracasts\Flash\FlashNotifier
      */
-    function flash()
+    function flash($message = null)
     {
-        return app('flash');
+        $notifier = app('flash');
+
+        if ( ! is_null($message)) {
+            return $notifier->info($message);
+        }
+
+        return $notifier;
     }
 
 }
