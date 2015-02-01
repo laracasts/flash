@@ -18,7 +18,10 @@
     "autoload": {
         "psr-0": {
             "Laracasts\\Flash": "src/"
-        }
+        },
+        "files": [
+            "src/Laracasts/Flash/functions.php"
+        ]
     },
     "minimum-stability": "stable"
 }
