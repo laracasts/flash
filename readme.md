@@ -38,6 +38,19 @@ public function store()
     return Redirect::home();
 }
 ```
+Within your controller , you can also pass laravel validation errors as array 
+
+```php
+$validator = Validator::make(Input::all(), User::$rules);
+ 
+if ($validator->passes()) {
+    // validation has passed, save user in DB
+} else {
+    // validation has failed, display error messages   
+     Flash::error($validator->messages()); 
+}
+
+```
 
 You may also do:
 
@@ -129,6 +142,15 @@ php artisan vendor:publish
 ```
 
 The two package views will now be located in the `app/views/packages/laracasts/flash/' directory.
+
+```php
+Flash::error($validator->messages()); 
+
+return Redirect::register();
+```
+
+![https://cloud.githubusercontent.com/assets/3633772/5359160/e2002470-7fc3-11e4-84f2-dfaa0c0a634b.png](https://cloud.githubusercontent.com/assets/3633772/5359160/e2002470-7fc3-11e4-84f2-dfaa0c0a634b.png)
+
 
 ```php
 Flash::message('Welcome aboard!');
