@@ -114,5 +114,17 @@ class FlashNotifier
 
         return $this;
     }
+    
+    /**
+     * Add an "raw" flash to the session.
+     *
+     * @return $this
+     */
+    public function raw()
+    {
+        $this->session->flash('flash_notification.raw', true);
+
+        return $this;
+    }
 
 }
