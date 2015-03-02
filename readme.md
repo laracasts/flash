@@ -139,7 +139,7 @@ return Redirect::home();
 ![https://dl.dropboxusercontent.com/u/774859/GitHub-Repos/flash/message.png](https://dl.dropboxusercontent.com/u/774859/GitHub-Repos/flash/message.png)
 
 ```php
-Flash::error('Sorry Please try again.');
+Flash::error('Sorry! Please try again.');
 
 return Redirect::home();
 ```
