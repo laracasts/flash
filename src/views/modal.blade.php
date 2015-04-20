@@ -8,7 +8,13 @@
             </div>
 
             <div class="modal-body">
-                <p>{{ $body }}</p>
+                <p>
+                    @if (Session::get('flash_notification.unescaped'))
+                        {!! $body !!}
+                    @else
+                        {{ $body }}
+                    @endif
+                </p>
             </div>
 
             <div class="modal-footer">
