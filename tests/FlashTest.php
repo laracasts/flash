@@ -86,4 +86,15 @@ class FlashTest extends PHPUnit_Framework_TestCase {
         $this->flash->overlay('Overlay Message');
 	}
 
+	/** @test */
+	public function it_displays_unescaped_flash_notifications()
+	{
+        $this->session->shouldReceive('flash')->with('flash_notification.message', 'Unescaped <i>Message</i>');
+        $this->session->shouldReceive('flash')->with('flash_notification.title', 'Notice');
+        $this->session->shouldReceive('flash')->with('flash_notification.level', 'info');
+        $this->session->shouldReceive('flash')->with('flash_notification.unescaped', true);
+
+        $this->flash->unescaped()->message('Unescaped <i>Message</i>');
+	}
+
 }
