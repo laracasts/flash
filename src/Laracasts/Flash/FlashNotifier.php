@@ -1,6 +1,8 @@
 <?php namespace Laracasts\Flash;
 
-class FlashNotifier
+use Laracasts\Flash\Contracts\FlashNotifierContract;
+
+class FlashNotifier implements FlashNotifierContract
 {
 
     /**
