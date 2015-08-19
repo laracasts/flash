@@ -10,7 +10,7 @@ First, pull in the package through Composer.
 }
 ```
 
-And then, if using Laravel 5, include the service provider within `app/config/app.php`.
+And then, if using Laravel 5, include the service provider within `config/app.php`.
 
 ```php
 'providers' => [
