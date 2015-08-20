@@ -24,6 +24,7 @@ class FlashNotifier
      * Flash an information message.
      *
      * @param string $message
+     * @return $this
      */
     public function info($message)
     {
@@ -111,6 +112,18 @@ class FlashNotifier
     public function important()
     {
         $this->session->flash('flash_notification.important', true);
+
+        return $this;
+    }
+
+    /**
+     * Do not escaped flash body.
+     *
+     * @return $this
+     */
+    public function unescaped()
+    {
+        $this->session->flash('flash_notification.unescaped', true);
 
         return $this;
     }
