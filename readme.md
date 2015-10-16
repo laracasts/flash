@@ -4,11 +4,7 @@
 
 First, pull in the package through Composer.
 
-```js
-"require": {
-    "laracasts/flash": "~1.3"
-}
-```
+Run `composer require laracasts/flash`
 
 And then, if using Laravel 5, include the service provider within `config/app.php`.
 
