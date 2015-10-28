@@ -128,7 +128,7 @@ If you need to modify the flash message partials, you can run:
 php artisan vendor:publish
 ```
 
-The two package views will now be located in the `app/views/packages/laracasts/flash/' directory.
+The two package views will now be located in the `app/views/packages/laracasts/flash/` directory.
 
 ```php
 Flash::message('Welcome aboard!');
