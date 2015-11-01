@@ -8,7 +8,18 @@
             </div>
 
             <div class="modal-body">
-                <p>{{ $body }}</p>
+
+                  @foreach($body as $index => $flash_notification_message)
+                    <div class="alert alert-info"
+                        style="border-radius:0;border-left:0;border-right:0;">
+                        <button type="button" class="close"
+                          data-dismiss="alert" aria-hidden="true">
+                          <i class="lnr lnr-cross"></i>
+                        </button>
+                        {!! $flash_notification_message !!}
+                    </div>
+                  @endforeach
+
             </div>
 
             <div class="modal-footer">
