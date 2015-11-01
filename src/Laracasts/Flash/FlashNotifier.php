@@ -29,15 +29,7 @@ class FlashNotifier
      */
     public function info($message)
     {
-<<<<<<< HEAD
-        $messages = \Session::get('flash_notification.message', []);
-
-        if(is_string($messages)) $messages = [$messages];
-        
-        $messages[] = $message;
-=======
         $messages = $this->push($message);
->>>>>>> 3965290a35abf5153098dcf6639c6cac82058303
 
         $this->message($messages, 'info');
 
@@ -52,15 +44,7 @@ class FlashNotifier
      */
     public function success($message)
     {
-<<<<<<< HEAD
-        $messages = \Session::get('flash_notification.message', []);
-
-        if(is_string($messages)) $messages = [$messages];
-        
-        $messages[] = $message;
-=======
         $messages = $this->push($message);
->>>>>>> 3965290a35abf5153098dcf6639c6cac82058303
 
         $this->message($messages, 'success');
 
@@ -75,15 +59,7 @@ class FlashNotifier
      */
     public function error($message)
     {
-<<<<<<< HEAD
-        $messages = \Session::get('flash_notification.message', []);
-
-        if(is_string($messages)) $messages = [$messages];
-        
-        $messages[] = $message;
-=======
         $messages = $this->push($message);
->>>>>>> 3965290a35abf5153098dcf6639c6cac82058303
 
         $this->message($messages, 'danger');
 
@@ -100,15 +76,7 @@ class FlashNotifier
     {
 
         //http://stackoverflow.com/questions/19777837/is-it-possible-to-store-an-array-as-flash-data-in-laravel
-<<<<<<< HEAD
-        $messages = \Session::get('flash_notification.message', []);
-
-        if(is_string($messages)) $messages = [$messages];
-        
-        $messages[] = $message;
-=======
         $messages = $this->push($message);
->>>>>>> 3965290a35abf5153098dcf6639c6cac82058303
 
         $this->message($messages, 'warning');
 
@@ -143,13 +111,10 @@ class FlashNotifier
     {
 
         $levels = \Session::get('flash_notification.level', []);
-<<<<<<< HEAD
-=======
 
         if(is_string($levels)) $levels = [$levels];
 
 
->>>>>>> 3965290a35abf5153098dcf6639c6cac82058303
         $levels[] = $level;
 
         $this->session->flash('flash_notification.message', $messages);
@@ -170,7 +135,14 @@ class FlashNotifier
         return $this;
     }
 
+
+    /**
+     * Pushing a new message into the messages array.
+     *
+     * @return $messages
+     */
     public function push($message){
+
 
       //http://stackoverflow.com/questions/19777837/is-it-possible-to-store-an-array-as-flash-data-in-laravel
       $messages = \Session::get('flash_notification.message');
