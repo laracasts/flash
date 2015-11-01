@@ -9,7 +9,6 @@
       <div class="container-fluid">
         <div class="row">
           <div class="text-center">
-            {{ Session::get('flash_notification.message') }}
 
                   <?php $flash_notification_messages = Session::get('flash_notification.message');
                           $flash_notification_levels = Session::get('flash_notification.level');?>
