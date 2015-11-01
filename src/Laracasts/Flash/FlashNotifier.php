@@ -1,5 +1,7 @@
 <?php namespace Laracasts\Flash;
 
+use Illuminate\Session\Store;
+
 class FlashNotifier
 {
 
@@ -27,7 +29,13 @@ class FlashNotifier
      */
     public function info($message)
     {
-        $this->message($message, 'info');
+        $messages = \Session::get('flash_notification.message', []);
+
+        if(is_string($messages)) $messages = [$messages];
+        
+        $messages[] = $message;
+
+        $this->message($messages, 'info');
 
         return $this;
     }
@@ -40,7 +48,13 @@ class FlashNotifier
      */
     public function success($message)
     {
-        $this->message($message, 'success');
+        $messages = \Session::get('flash_notification.message', []);
+
+        if(is_string($messages)) $messages = [$messages];
+        
+        $messages[] = $message;
+
+        $this->message($messages, 'success');
 
         return $this;
     }
@@ -53,7 +67,13 @@ class FlashNotifier
      */
     public function error($message)
     {
-        $this->message($message, 'danger');
+        $messages = \Session::get('flash_notification.message', []);
+
+        if(is_string($messages)) $messages = [$messages];
+        
+        $messages[] = $message;
+
+        $this->message($messages, 'danger');
 
         return $this;
     }
@@ -66,7 +86,15 @@ class FlashNotifier
      */
     public function warning($message)
     {
-        $this->message($message, 'warning');
+
+        //http://stackoverflow.com/questions/19777837/is-it-possible-to-store-an-array-as-flash-data-in-laravel
+        $messages = \Session::get('flash_notification.message', []);
+
+        if(is_string($messages)) $messages = [$messages];
+        
+        $messages[] = $message;
+
+        $this->message($messages, 'warning');
 
         return $this;
     }
@@ -89,16 +117,20 @@ class FlashNotifier
     }
 
     /**
-     * Flash a general message.
+     * Flash general message(s).
      *
-     * @param  string $message
+     * @param  array $messages
      * @param  string $level
      * @return $this
      */
-    public function message($message, $level = 'info')
+    public function message($messages, $level = 'info')
     {
-        $this->session->flash('flash_notification.message', $message);
-        $this->session->flash('flash_notification.level', $level);
+
+        $levels = \Session::get('flash_notification.level', []);
+        $levels[] = $level;
+
+        $this->session->flash('flash_notification.message', $messages);
+        $this->session->flash('flash_notification.level', $levels);
 
         return $this;
     }
