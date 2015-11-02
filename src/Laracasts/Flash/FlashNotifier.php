@@ -110,10 +110,11 @@ class FlashNotifier
     public function message($messages, $level = 'info')
     {
 
+        if($level == 'info') $messages = $this->push($messages);
+
         $levels = \Session::get('flash_notification.level', []);
 
         if(is_string($levels)) $levels = [$levels];
-
 
         $levels[] = $level;
 
