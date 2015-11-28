@@ -54,7 +54,7 @@ Again, if using Laravel, this will set a few keys in the session:
 
 Alternatively, again, if you're using Laravel, you may reference the `flash()` helper function, instead of the facade. Here's an example:
 
-```
+```php
 /**
  * Destroy the user's session (logout).
  *
