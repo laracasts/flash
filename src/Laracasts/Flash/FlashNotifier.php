@@ -80,7 +80,7 @@ class FlashNotifier
      */
     public function overlay($message, $title = 'Notice')
     {
-        $this->message($message, 'info', $title);
+        $this->message($message);
 
         $this->session->flash('flash_notification.overlay', true);
         $this->session->flash('flash_notification.title', $title);
