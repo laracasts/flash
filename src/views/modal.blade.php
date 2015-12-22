@@ -8,7 +8,7 @@
             </div>
 
             <div class="modal-body">
-                <p>{{ $body }}</p>
+                <p>{!! $body !!}</p>
             </div>
 
             <div class="modal-footer">
