@@ -76,11 +76,12 @@ class FlashNotifier
      *
      * @param  string $message
      * @param  string $title
+     * @param  string $level
      * @return $this
      */
-    public function overlay($message, $title = 'Notice')
+    public function overlay($message, $title = 'Notice', $level = 'info')
     {
-        $this->message($message);
+        $this->message($message, $level);
 
         $this->session->flash('flash_notification.overlay', true);
         $this->session->flash('flash_notification.title', $title);

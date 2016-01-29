@@ -86,4 +86,15 @@ class FlashTest extends PHPUnit_Framework_TestCase {
         $this->flash->overlay('Overlay Message');
 	}
 
+    /** @test */
+    public function it_displays_flash_overlay_notifications_with_custom_level()
+    {
+        $this->session->shouldReceive('flash')->with('flash_notification.message', 'Overlay Message');
+        $this->session->shouldReceive('flash')->with('flash_notification.title', 'Notice');
+        $this->session->shouldReceive('flash')->with('flash_notification.level', 'danger');
+        $this->session->shouldReceive('flash')->with('flash_notification.overlay', true);
+
+        $this->flash->overlay('Overlay Message','Notice','danger');
+    }
+
 }
