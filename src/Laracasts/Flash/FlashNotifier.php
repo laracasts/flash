@@ -24,6 +24,7 @@ class FlashNotifier
      * Flash an information message.
      *
      * @param string $message
+     * @return $this
      */
     public function info($message)
     {
