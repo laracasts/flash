@@ -6,14 +6,15 @@
             'body'       => session('flash_notification.message')
         ])
     @else
-        <div class="alert alert-{{ session('flash_notification.level') }}">
-            <button type="button" 
-                    class="close" 
-                    data-dismiss="alert" 
+        <div class="alert alert-{{ session('flash_notification.level') }} {{ session()->has('flash_notification.important') ? 'alert-important' : '' }}">
+            @if(session()->has('flash_notification.important'))
+            <button type="button"
+                    class="close"
+                    data-dismiss="alert"
                     aria-hidden="true">&times;</button>
+            @endif
 
             {!! session('flash_notification.message') !!}
         </div>
     @endif
 @endif
-
