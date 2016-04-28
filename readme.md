@@ -10,7 +10,7 @@ And then, if using Laravel 5, include the service provider within `config/app.ph
 
 ```php
 'providers' => [
-    'Laracasts\Flash\FlashServiceProvider'
+    Laracasts\Flash\FlashServiceProvider::class,
 ];
 ```
 
@@ -18,7 +18,7 @@ And, for convenience, add a facade alias to this same file at the bottom:
 
 ```php
 'aliases' => [
-    'Flash' => 'Laracasts\Flash\Flash'
+    'Flash' => Laracasts\Flash\Flash::class,
 ];
 ```
 
