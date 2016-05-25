@@ -9,5 +9,11 @@ interface SessionStore {
      * @param $data
      */
     public function flash($name, $data);
-
+	
+	/**
+     * Kills flash notification after displaying on page
+     * Must be called from template like this {{ flash()->kill() }}
+     * @return $this
+     */
+    public function kill();
 } 

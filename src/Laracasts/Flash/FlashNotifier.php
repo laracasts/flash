@@ -71,6 +71,16 @@ class FlashNotifier
 
         return $this;
     }
+	
+	/**
+     * Kills the notification in the session
+     * Needed if you do not want to display message twice
+     * when not redirecting
+     */
+    public function kill()
+    {
+        $this->session->kill();
+    }
 
     /**
      * Flash an overlay modal.
