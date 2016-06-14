@@ -12,8 +12,8 @@
                     data-dismiss="alert" 
                     aria-hidden="true">&times;</button>
 
-			@if( session('flash_notification.message') instanceof \Illuminate\Contracts\Support\MessageBag &&
-			session('flash_notification.message')->has())
+			@if( session('flash_notification.message') instanceof \Illuminate\Contracts\Support\MessageBag
+			&&   session('flash_notification.message')->has())
 				@foreach (session('flash_notification.message')->all() as $error)
 					<li> {!! $error !!} </li>
 				@endforeach
