@@ -18,7 +18,7 @@ And, for convenience, add a facade alias to this same file at the bottom:
 
 ```php
 'aliases' => [
-    'Flash' => Laracasts\Flash\Flash:class,
+    'Flash' => Laracasts\Flash\Flash::class,
 ];
 ```
 
