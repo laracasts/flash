@@ -54,7 +54,7 @@ class FlashNotifier
      */
     public function error($message)
     {
-        $this->message($message, 'danger');
+        $this->message($message, 'error');
 
         return $this;
     }
