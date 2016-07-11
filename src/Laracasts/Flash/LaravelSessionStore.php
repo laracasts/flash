@@ -1,15 +1,19 @@
-<?php namespace Laracasts\Flash;
+<?php
+
+namespace Laracasts\Flash;
 
 use Illuminate\Session\Store;
 
-class LaravelSessionStore implements SessionStore {
-
+class LaravelSessionStore implements SessionStore
+{
     /**
      * @var Store
      */
     private $session;
 
     /**
+     * Create a new session store instance.
+     *
      * @param Store $session
      */
     function __construct(Store $session)
@@ -20,12 +24,11 @@ class LaravelSessionStore implements SessionStore {
     /**
      * Flash a message to the session.
      *
-     * @param $name
-     * @param $data
+     * @param string $name
+     * @param array  $data
      */
     public function flash($name, $data)
     {
         $this->session->flash($name, $data);
     }
-
 }

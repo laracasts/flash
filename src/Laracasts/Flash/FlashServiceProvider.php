@@ -1,10 +1,11 @@
-<?php namespace Laracasts\Flash;
+<?php
+
+namespace Laracasts\Flash;
 
 use Illuminate\Support\ServiceProvider;
 
 class FlashServiceProvider extends ServiceProvider
 {
-
     /**
      * Indicates if loading of the provider is deferred.
      *

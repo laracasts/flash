@@ -1,9 +1,11 @@
-<?php namespace Laracasts\Flash;
+<?php
+
+namespace Laracasts\Flash;
 
 use Illuminate\Support\Facades\Facade;
 
-class Flash extends Facade {
-
+class Flash extends Facade
+{
     /**
      * Get the binding in the IoC container
      *
@@ -13,5 +15,4 @@ class Flash extends Facade {
     {
         return 'flash';
     }
-
-} 
+}

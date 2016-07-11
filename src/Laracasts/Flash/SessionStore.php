@@ -1,13 +1,14 @@
-<?php namespace Laracasts\Flash;
+<?php
 
-interface SessionStore {
+namespace Laracasts\Flash;
 
+interface SessionStore
+{
     /**
      * Flash a message to the session.
      *
-     * @param $name
-     * @param $data
+     * @param string $name
+     * @param array  $data
      */
     public function flash($name, $data);
-
-} 
+}

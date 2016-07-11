@@ -1,8 +1,9 @@
-<?php namespace Laracasts\Flash;
+<?php
+
+namespace Laracasts\Flash;
 
 class FlashNotifier
 {
-
     /**
      * The session writer.
      *
@@ -23,7 +24,7 @@ class FlashNotifier
     /**
      * Flash an information message.
      *
-     * @param string $message
+     * @param  string $message
      * @return $this
      */
     public function info($message)
@@ -116,5 +117,5 @@ class FlashNotifier
 
         return $this;
     }
-
 }
+
