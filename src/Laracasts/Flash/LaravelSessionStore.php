@@ -26,6 +26,15 @@ class LaravelSessionStore implements SessionStore {
     public function flash($name, $data)
     {
         $this->session->flash($name, $data);
+    }	
+	
+    /**
+     * Kills flash notification after displaying on page
+     * Must be called from template like this {{ flash()->kill() }}
+     * @return $this
+     */
+    public function kill()
+    {
+        $this->session->set('flash_notification', null);
     }
-
 }
