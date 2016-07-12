@@ -48,7 +48,7 @@ With this message flashed to the session, you may now display it in your view(s)
     <div class="alert alert-{{ session('flash_notification.level') }}">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 
-        {{ session('flash_notification.message') }}
+        {!! session('flash_notification.message') !!}
     </div>
 @endif
 ```
