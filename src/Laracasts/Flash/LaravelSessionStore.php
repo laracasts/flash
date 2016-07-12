@@ -29,6 +29,7 @@ class LaravelSessionStore implements SessionStore
      */
     public function flash($name, $data)
     {
-        $this->session->flash($name, $data);
+        if (! $this->session->has($name))
+            $this->session->flash($name, $data);
     }
 }
