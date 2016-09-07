@@ -12,6 +12,13 @@ class FlashNotifier
     private $session;
 
     /**
+     * The array of flash messages
+     *
+     * @var array
+     */
+    private $flashMessages = [];
+
+    /**
      * Create a new flash notifier instance.
      *
      * @param SessionStore $session
@@ -83,10 +90,11 @@ class FlashNotifier
      */
     public function overlay($message, $title = 'Notice', $level = 'info')
     {
-        $this->message($message, $level);
-
-        $this->session->flash('flash_notification.overlay', true);
-        $this->session->flash('flash_notification.title', $title);
+        $this->session->flash('flash_notification.overlay', [
+            'title' => $title,
+            'message' => $message,
+            'level' => $level
+        ]);
 
         return $this;
     }
@@ -100,22 +108,34 @@ class FlashNotifier
      */
     public function message($message, $level = 'info')
     {
-        $this->session->flash('flash_notification.message', $message);
-        $this->session->flash('flash_notification.level', $level);
+        $this->flashMessages[] = [
+            'message' => $message,
+            'level' => $level
+        ];
+
+        $this->flashMessages();
 
         return $this;
     }
 
     /**
-     * Add an "important" flash to the session.
+     * Add an "important" to the last flash message.
      *
      * @return $this
      */
     public function important()
     {
-        $this->session->flash('flash_notification.important', true);
+        $this->flashMessages[count($this->flashMessages) - 1]['important'] = 'true';
+
+        $this->flashMessages();
 
         return $this;
     }
+
+    private function flashMessages()
+    {
+        $this->session->flash('flash_notification.message', $this->flashMessages);
+    }
+
 }
 
