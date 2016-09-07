@@ -85,11 +85,11 @@ class FlashTest extends PHPUnit_Framework_TestCase {
 	/** @test */
 	public function it_displays_flash_overlay_notifications()
 	{
-        $this->session->shouldReceive('flash')->with('flash_notification.overlay', [[
+        $this->session->shouldReceive('flash')->with('flash_notification.overlay', [
             'message' => 'Overlay Message',
             'level' => 'info',
             'title' => 'Notice'
-        ]]);
+        ]);
 
         $this->flash->overlay('Overlay Message');
 	}
@@ -97,11 +97,11 @@ class FlashTest extends PHPUnit_Framework_TestCase {
     /** @test */
     public function it_displays_flash_overlay_notifications_with_custom_level()
     {
-        $this->session->shouldReceive('flash')->with('flash_notification.overlay',[[
+        $this->session->shouldReceive('flash')->with('flash_notification.overlay',[
             'message' => 'Overlay Message',
             'level' => 'danger',
             'title' => 'Custom Title'
-        ]]);
+        ]);
 
         $this->flash->overlay('Overlay Message','Custom Title','danger');
     }
