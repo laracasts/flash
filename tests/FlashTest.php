@@ -76,7 +76,6 @@ class FlashTest extends PHPUnit_Framework_TestCase {
         $this->session->shouldReceive('flash')->with('flash_notification.message', [[
             'message' => 'You are now signed up.',
             'level' => 'success',
-            //'title' => 'Success Heading'
         ]]);
 
         $this->flash->success('You are now signed up.', 'Success Heading');
@@ -104,5 +103,31 @@ class FlashTest extends PHPUnit_Framework_TestCase {
         ]);
 
         $this->flash->overlay('Overlay Message','Custom Title','danger');
+    }
+
+    /** @test */
+    public function it_allows_for_multiple_flash_messages()
+    {
+        $this->session->shouldReceive('flash')->with('flash_notification.message',[
+            [
+                'message' => 'Message 1',
+                'level' => 'info'
+            ]
+        ]);
+
+        $this->flash->message('Message 1');
+
+        $this->session->shouldReceive('flash')->with('flash_notification.message',[
+            [
+                'message' => 'Message 1',
+                'level' => 'info'
+            ],
+            [
+                'message' => 'Message 2',
+                'level' => 'success'
+            ]
+        ]);
+
+        $this->flash->success('Message 2');
     }
 }
