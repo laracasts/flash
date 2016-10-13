@@ -44,13 +44,24 @@ Behind the scenes, this will set a few keys in the session:
 With this message flashed to the session, you may now display it in your view(s). Maybe something like:
 
 ```html
-@if (session()->has('flash_notification.message'))
-    <div class="alert alert-{{ session('flash_notification.level') }}">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    @if (session()->has('flash_notification.message'))
+        @foreach(session('flash_notification.message') as $f)
+                <div class="alert
+                            alert-{{ $f['level'] }}
+                            {{ isset($f['important']) ? 'alert-important' : '' }}"
+                >
+                    @if(isset($f['important']) && $f['important'])
+                        <button type="button"
+                                class="close"
+                                data-dismiss="alert"
+                                aria-hidden="true"
+                        >&times;</button>
+                    @endif
 
-        {!! session('flash_notification.message') !!}
-    </div>
-@endif
+                    {!! $f['message'] !!}
+                </div>
+        @endforeach
+    @endif
 ```
 
 > Note that this package is optimized for use with Twitter Bootstrap.
