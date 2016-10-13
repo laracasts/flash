@@ -50,14 +50,6 @@ With this message flashed to the session, you may now display it in your view(s)
                             alert-{{ $f['level'] }}
                             {{ isset($f['important']) ? 'alert-important' : '' }}"
                 >
-                    @if(isset($f['important']) && $f['important'])
-                        <button type="button"
-                                class="close"
-                                data-dismiss="alert"
-                                aria-hidden="true"
-                        >&times;</button>
-                    @endif
-
                     {!! $f['message'] !!}
                 </div>
         @endforeach
