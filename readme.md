@@ -94,7 +94,7 @@ Because flash messages and overlays are so common, if you want, you may use (or 
 If you need to modify the flash message partials, you can run:
 
 ```bash
-php artisan vendor:publish
+php artisan vendor:publish --provider="Laracasts\Flash\FlashServiceProvider"
 ```
 
 The two package views will now be located in the `app/views/packages/laracasts/flash/` directory.
