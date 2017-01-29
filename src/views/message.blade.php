@@ -3,7 +3,8 @@
         @include('flash::modal', [
             'modalClass' => 'flash-modal',
             'title'      => session('flash_notification.title'),
-            'body'       => session('flash_notification.message')
+            'body'       => session('flash_notification.message'),
+            'msg_close'  => session('flash_notification.msg_close')
         ])
     @else
         <div class="alert
