@@ -134,14 +134,19 @@ If no translation is defined for the passed message string in the current locale
 To add localization parameters to your message, you can use:
 
 ```php
-flash('messages.welcome')->parameters(['name' => 'Jeffrey']);
-return home();
+flash('Hello, :name')->parameters(['name' => 'Jeffrey']);
+return view('/');
 ```
-Assuming `/resources/lang/en/messages.php` returns the array element `'welcome' => "Hello, :name"`, this will produce:
 
 ![https://dl.dropboxusercontent.com/s/ib8yiajny6x1sg0/Screen%20Shot%202017-03-22%20at%208.08.18%20PM.png?dl=0](https://dl.dropboxusercontent.com/s/ib8yiajny6x1sg0/Screen%20Shot%202017-03-22%20at%208.08.18%20PM.png?dl=0)
 
-*Note: As of Laravel 5.4, only the "Short Keys" method of translation definition (shown above) supports parameters.*
+You could then add, for example, a Spanish translation by creating `/resources/lang/es.json` with the content:
+```json
+{
+  "Hello, :name" : "Hola, :name"
+}
+```
+*Translations defined using short keys can also accept parameters.*
 
 You can also override the close button text in your modal overlays by defining a `closeButton` short key inside `/resources/lang/vendor/flash/{locale}/flash.php` where `{locale}` is your supported language(s). 
 
