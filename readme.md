@@ -126,7 +126,8 @@ return home();
 
 > [Learn exactly how to build this very package on Laracasts!](https://laracasts.com/lessons/flexible-flash-messages)
 
-##Localization Support
+## Localization Support
+
 This package supports Laravel's localization system out of the box to flash messages in multiple languages. Translation Strings can be defined using either method described in the [Localization Documentation](https://laravel.com/docs/master/localization#defining-translation-strings).  
 If no translation is defined for the passed message string in the current locale, the string itself is returned, as shown above.
 
