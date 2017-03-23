@@ -1,9 +1,12 @@
+@php($params = (session()->has('flash_notification.params') ? session('flash_notification.params') : [] ))
+
 @if (session()->has('flash_notification.message'))
     @if (session()->has('flash_notification.overlay'))
         @include('flash::modal', [
             'modalClass' => 'flash-modal',
             'title'      => session('flash_notification.title'),
-            'body'       => session('flash_notification.message')
+            'body'       => session('flash_notification.message'),
+            'params'     => $params
         ])
     @else
         <div class="alert
@@ -18,7 +21,7 @@
                 >&times;</button>
             @endif
 
-            {!! session('flash_notification.message') !!}
+            @lang( session('flash_notification.message'), $params )
         </div>
     @endif
 @endif
