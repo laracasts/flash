@@ -137,7 +137,7 @@ To add localization parameters to your message, you can use:
 flash('messages.welcome')->parameters(['name' => 'Jeffrey']);
 return home();
 ```
-Assuming `/resources/lang/en/messages.php` returns the array element `'welcome' => "Hello, :name"` will produce:
+Assuming `/resources/lang/en/messages.php` returns the array element `'welcome' => "Hello, :name"`, this will produce:
 
 ![https://dl.dropboxusercontent.com/s/ib8yiajny6x1sg0/Screen%20Shot%202017-03-22%20at%208.08.18%20PM.png?dl=0](https://dl.dropboxusercontent.com/s/ib8yiajny6x1sg0/Screen%20Shot%202017-03-22%20at%208.08.18%20PM.png?dl=0)
 
