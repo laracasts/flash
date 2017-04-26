@@ -9,10 +9,17 @@ class FlashNotifier
      *
      * @var SessionStore
      */
-    private $session;
+    protected $session;
 
     /**
-     * Create a new flash notifier instance.
+     * The message being flashed.
+     *
+     * @var string
+     */
+    protected $message = '';
+
+    /**
+     * Create a new FlashNotifier instance.
      *
      * @param SessionStore $session
      */
@@ -40,7 +47,7 @@ class FlashNotifier
      * @param  string $message
      * @return $this
      */
-    public function success($message)
+    public function success($message = null)
     {
         $this->message($message, 'success');
 
@@ -53,7 +60,7 @@ class FlashNotifier
      * @param  string $message
      * @return $this
      */
-    public function error($message)
+    public function error($message = null)
     {
         $this->message($message, 'danger');
 
@@ -66,7 +73,7 @@ class FlashNotifier
      * @param  string $message
      * @return $this
      */
-    public function warning($message)
+    public function warning($message = null)
     {
         $this->message($message, 'warning');
 
@@ -76,14 +83,16 @@ class FlashNotifier
     /**
      * Flash an overlay modal.
      *
-     * @param  string $message
-     * @param  string $title
-     * @param  string $level
+     * @param  string|null $message
+     * @param  string      $title
+     * @param  string      $level
      * @return $this
      */
-    public function overlay($message, $title = 'Notice', $level = 'info')
+    public function overlay($message = null, $title = 'Notice', $level = 'info')
     {
-        $this->message($message, $level);
+        if ($message) {
+            $this->message($message, $level);
+        }
 
         $this->session->flash('flash_notification.overlay', true);
         $this->session->flash('flash_notification.title', $title);
@@ -100,7 +109,11 @@ class FlashNotifier
      */
     public function message($message, $level = 'info')
     {
-        $this->session->flash('flash_notification.message', $message);
+        if ($message) {
+            $this->message = $message;
+        }
+
+        $this->session->flash('flash_notification.message', $this->message);
         $this->session->flash('flash_notification.level', $level);
 
         return $this;
