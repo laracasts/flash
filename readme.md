@@ -47,24 +47,7 @@ You may also do:
 - `flash('Message')->important()`: Add a close button to the flash message.
 - `flash('Message')->error()->important()`: Render a "danger" flash message that must be dismissed.
 
-Behind the scenes, this will set a few keys in the session:
-
-- `flash_notification.message` - The message you're flashing
-- `flash_notification.level` - A string that represents the type of notification (good for applying HTML class names)
-
-With this message flashed to the session, you may now display it in your view(s). Maybe something like:
-
-```html
-@if (session('flash_notification.message')
-    <div class="alert alert-{{ session('flash_notification.level') }}">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-
-        {!! session('flash_notification.message') !!}
-    </div>
-@endif
-```
-
-Because flash messages and overlays are so common, we provide a template out of the box to get you started. You're free to use - and even modify to your needs - this template how you see fit.
+With this message flashed to the session, you may now display it in your view(s). Because flash messages and overlays are so common, we provide a template out of the box to get you started. You're free to use - and even modify to your needs - this template how you see fit.
 
 ```html
 @include('flash::message')
