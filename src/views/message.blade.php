@@ -14,8 +14,7 @@
                 <button type="button"
                         class="close"
                         data-dismiss="alert"
-                        aria-hidden="true"
-                >&times;</button>
+                ><span aria-hidden="true">&times;</span></button>
             @endif
 
             {!! session('flash_notification.message') !!}
