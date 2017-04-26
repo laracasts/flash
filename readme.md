@@ -33,7 +33,7 @@ You may also do:
 - `flash('Message', 'success')`
 - `flash('Message', 'danger')`
 - `flash('Message', 'warning')`
-- `flash()->overlay('Modal Message', 'Modal Title')`
+- `flash()->overlay('Modal Message', 'Modal Title', 'Close Button')`
 - `flash('Message')->important()`
 
 Behind the scenes, this will set a few keys in the session:
