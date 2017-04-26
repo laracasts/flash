@@ -21,4 +21,5 @@
             {!! session('flash_notification.message') !!}
         </div>
     @endif
+    {{ Session::forget('flash_notification') }}
 @endif
