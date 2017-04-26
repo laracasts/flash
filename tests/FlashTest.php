@@ -1,8 +1,9 @@
 <?php
 
 use Laracasts\Flash\FlashNotifier;
+use PHPUnit\Framework\TestCase;
 
-class FlashTest extends PHPUnit_Framework_TestCase
+class FlashTest extends TestCase
 {
     protected $session;
 
@@ -10,7 +11,7 @@ class FlashTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->session = Mockery::mock('Laracasts\Flash\SessionStore');
+        $this->session = Mockery::spy('Laracasts\Flash\SessionStore');
 
         $this->flash = new FlashNotifier($this->session);
     }
@@ -18,83 +19,141 @@ class FlashTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function it_displays_default_flash_notifications()
     {
-        $this->session->shouldReceive('flash')->with('flash_notification.message', 'Welcome Aboard');
-        $this->session->shouldReceive('flash')->with('flash_notification.title', 'Notice');
-        $this->session->shouldReceive('flash')->with('flash_notification.level', 'info');
-
         $this->flash->message('Welcome Aboard');
+
+        $this->assertCount(1, $this->flash->messages);
+
+        $this->assertEquals([
+            'title' => '',
+            'message' => 'Welcome Aboard',
+            'level' => 'info',
+            'important' => false,
+            'overlay' => false
+        ], $this->flash->messages[0]);
+
+        $this->assertSessionIsFlashed();
     }
 
     /** @test */
-    public function it_displays_info_flash_notifications()
+    public function it_displays_multiple_flash_notifications()
     {
-        $this->session->shouldReceive('flash')->with('flash_notification.message', 'Welcome Aboard');
-        $this->session->shouldReceive('flash')->with('flash_notification.title', 'Notice');
-        $this->session->shouldReceive('flash')->with('flash_notification.level', 'info');
+        $this->flash->message('Welcome Aboard');
+        $this->flash->message('Welcome Aboard Again');
 
-        $this->flash->info('Welcome Aboard');
+        $this->assertCount(2, $this->flash->messages);
+
+        $this->assertSessionIsFlashed();
     }
 
     /** @test */
-    public function it_displays_success_flash_notifications()
+    function it_displays_success_flash_notifications()
     {
-        $this->session->shouldReceive('flash')->with('flash_notification.message', 'Welcome Aboard');
-        $this->session->shouldReceive('flash')->with('flash_notification.title', 'Notice');
-        $this->session->shouldReceive('flash')->with('flash_notification.level', 'success');
+        $this->flash->message('Welcome Aboard')->success();
 
-        $this->flash->success('Welcome Aboard');
+        $this->assertEquals([
+            'title' => '',
+            'message' => 'Welcome Aboard',
+            'level' => 'success',
+            'important' => false,
+            'overlay' => false
+        ], $this->flash->messages[0]);
+
+        $this->assertSessionIsFlashed();
     }
 
     /** @test */
-    public function it_displays_error_flash_notifications()
+    function it_displays_error_flash_notifications()
     {
-        $this->session->shouldReceive('flash')->with('flash_notification.message', 'Uh Oh');
-        $this->session->shouldReceive('flash')->with('flash_notification.title', 'Notice');
-        $this->session->shouldReceive('flash')->with('flash_notification.level', 'danger');
+        $this->flash->message('Uh Oh')->error();
 
-        $this->flash->error('Uh Oh');
+        $this->assertEquals([
+            'title' => '',
+            'message' => 'Uh Oh',
+            'level' => 'danger',
+            'important' => false,
+            'overlay' => false
+        ], $this->flash->messages[0]);
+
+        $this->assertSessionIsFlashed();
     }
 
     /** @test */
-    public function it_displays_warning_flash_notifications()
+    function it_displays_warning_flash_notifications()
     {
-        $this->session->shouldReceive('flash')->with('flash_notification.message', 'Be careful!');
-        $this->session->shouldReceive('flash')->with('flash_notification.title', 'Notice');
-        $this->session->shouldReceive('flash')->with('flash_notification.level', 'warning');
+        $this->flash->message('Warning Warning')->warning();
 
-        $this->flash->warning('Be careful!');
+        $this->assertEquals([
+            'title' => '',
+            'message' => 'Warning Warning',
+            'level' => 'warning',
+            'important' => false,
+            'overlay' => false
+        ], $this->flash->messages[0]);
+
+        $this->assertSessionIsFlashed();
     }
 
     /** @test */
-    public function it_displays_custom_message_titles()
+    function it_displays_important_flash_notifications()
     {
-        $this->session->shouldReceive('flash')->with('flash_notification.message', 'You are now signed up.');
-        $this->session->shouldReceive('flash')->with('flash_notification.title', 'Success Heading');
-        $this->session->shouldReceive('flash')->with('flash_notification.level', 'success');
+        $this->flash->message('Welcome Aboard')->important();
 
-        $this->flash->success('You are now signed up.', 'Success Heading');
+        $this->assertEquals([
+            'title' => '',
+            'message' => 'Welcome Aboard',
+            'level' => 'info',
+            'important' => true,
+            'overlay' => false
+        ], $this->flash->messages[0]);
+
+        $this->assertSessionIsFlashed();
     }
 
     /** @test */
-    public function it_displays_flash_overlay_notifications()
+    function it_builds_an_overlay_flash_notification()
     {
-        $this->session->shouldReceive('flash')->with('flash_notification.message', 'Overlay Message');
-        $this->session->shouldReceive('flash')->with('flash_notification.title', 'Notice');
-        $this->session->shouldReceive('flash')->with('flash_notification.level', 'info');
-        $this->session->shouldReceive('flash')->with('flash_notification.overlay', true);
+        $this->flash->message('Warning Warning')->overlay();
 
-        $this->flash->overlay('Overlay Message');
+        $this->assertEquals([
+            'title' => 'Notice',
+            'message' => 'Warning Warning',
+            'level' => 'info',
+            'important' => false,
+            'overlay' => true
+        ], $this->flash->messages[0]);
+
+        $this->flash->clear();
+
+        $this->flash->overlay('Overlay message.', 'Overlay Title');
+
+        $this->assertEquals([
+            'title' => 'Overlay Title',
+            'message' => 'Overlay message.',
+            'level' => 'info',
+            'important' => false,
+            'overlay' => true
+        ], $this->flash->messages[0]);
+
+        $this->assertSessionIsFlashed();
     }
 
     /** @test */
-    public function it_displays_flash_overlay_notifications_with_custom_level()
+    function it_clears_all_messages()
     {
-        $this->session->shouldReceive('flash')->with('flash_notification.message', 'Overlay Message');
-        $this->session->shouldReceive('flash')->with('flash_notification.title', 'Notice');
-        $this->session->shouldReceive('flash')->with('flash_notification.level', 'danger');
-        $this->session->shouldReceive('flash')->with('flash_notification.overlay', true);
+        $this->flash->message('Welcome Aboard');
 
-        $this->flash->overlay('Overlay Message', 'Notice', 'danger');
+        $this->assertCount(1, $this->flash->messages);
+
+        $this->flash->clear();
+
+        $this->assertCount(0, $this->flash->messages);
     }
 
+    protected function assertSessionIsFlashed()
+    {
+        $this->session
+            ->shouldHaveReceived('flash')
+            ->with('flash_notification', $this->flash->messages)
+            ->once();
+    }
 }

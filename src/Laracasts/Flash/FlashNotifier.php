@@ -16,7 +16,7 @@ class FlashNotifier
      *
      * @var string
      */
-    protected $message = '';
+    public $messages = [];
 
     /**
      * Create a new FlashNotifier instance.
@@ -94,8 +94,21 @@ class FlashNotifier
             $this->message($message, $level);
         }
 
-        $this->session->flash('flash_notification.overlay', true);
-        $this->session->flash('flash_notification.title', $title);
+        $overlay = true;
+
+        $this->updateLastMessage(compact('overlay', 'title', 'level'));
+
+        return $this;
+    }
+
+    /**
+     * Add an "important" flash to the session.
+     *
+     * @return $this
+     */
+    public function important()
+    {
+        $this->updateLastMessage(['important' => true]);
 
         return $this;
     }
@@ -109,24 +122,65 @@ class FlashNotifier
      */
     public function message($message, $level = 'info')
     {
-        if ($message) {
-            $this->message = $message;
+        if (!$message) {
+            return $this->updateLastMessage(compact('level'));
         }
 
-        $this->session->flash('flash_notification.message', $this->message);
-        $this->session->flash('flash_notification.level', $level);
+        return $this->addMessage(compact('message', 'level'));
+    }
+
+    /**
+     * Flash a new message to the session.
+     *
+     * @param  array $message
+     * @return $this
+     */
+    protected function addMessage($message = [])
+    {
+        $defaults = [
+            'title' => '',
+            'important' => false,
+            'overlay' => false
+        ];
+
+        $this->messages[] = array_merge($defaults, $message);
+
+        $this->flash();
 
         return $this;
     }
 
     /**
-     * Add an "important" flash to the session.
+     * Modify the most recently added message.
+     *
+     * @param  array $overrides
+     * @return $this
+     */
+    protected function updateLastMessage($overrides = [])
+    {
+        $message = array_merge(array_pop($this->messages), $overrides);
+
+        $this->addMessage($message);
+
+        return $this;
+    }
+
+    /**
+     * Flash all messages to the session.
+     */
+    protected function flash()
+    {
+        $this->session->flash('flash_notification', $this->messages);
+    }
+
+    /**
+     * Clear all registered messages.
      *
      * @return $this
      */
-    public function important()
+    public function clear()
     {
-        $this->session->flash('flash_notification.important', true);
+        $this->messages = [];
 
         return $this;
     }

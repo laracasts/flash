@@ -49,8 +49,8 @@ You may also do:
 
 Behind the scenes, this will set a few keys in the session:
 
-- 'flash_notification.message' - The message you're flashing
-- 'flash_notification.level' - A string that represents the type of notification (good for applying HTML class names)
+- `flash_notification.message` - The message you're flashing
+- `flash_notification.level` - A string that represents the type of notification (good for applying HTML class names)
 
 With this message flashed to the session, you may now display it in your view(s). Maybe something like:
 
@@ -145,3 +145,18 @@ $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
 ```
 
 This will find any alerts - excluding the important ones, which should remain until manually closed by the user - wait three seconds, and then fade them out.
+
+## Multiple Flash Messages
+
+Need to flash multiple flash messages to the session? No problem.
+
+```php
+flash('Message 1');
+flash('Message 2')->important();
+
+return redirect('somewhere');
+```
+
+Done! You'll now see two flash messages upon redirect.
+
+
