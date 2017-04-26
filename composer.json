@@ -13,7 +13,8 @@
         "illuminate/support": "~5.0"
     },
     "require-dev": {
-        "mockery/mockery": "dev-master"
+        "mockery/mockery": "dev-master",
+        "phpunit/phpunit": "^6.1"
     },
     "autoload": {
         "psr-0": {
