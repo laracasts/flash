@@ -117,5 +117,22 @@ class FlashNotifier
 
         return $this;
     }
+
+    /**
+     * Allows adding named parameters to flash messages
+     * @param $params an array of parameters
+     * @return $this
+     */
+    public function parameters($params)
+    {
+        //Guarantee an associative array
+        if( ! is_array($params)) {
+            $params = compact($params);
+        }
+
+        $this->session->flash('flash_notification.params', $params);
+
+        return $this;
+    }
 }
 

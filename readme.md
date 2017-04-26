@@ -40,6 +40,7 @@ Behind the scenes, this will set a few keys in the session:
 
 - 'flash_notification.message' - The message you're flashing
 - 'flash_notification.level' - A string that represents the type of notification (good for applying HTML class names)
+- 'flash_notification.params' - An optional array of parameters used for localization
 
 With this message flashed to the session, you may now display it in your view(s). Maybe something like:
 
@@ -48,7 +49,7 @@ With this message flashed to the session, you may now display it in your view(s)
     <div class="alert alert-{{ session('flash_notification.level') }}">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 
-        {!! session('flash_notification.message') !!}
+        @lang( session('flash_notification.message'), session('flash_notification.params', [] )
     </div>
 @endif
 ```
@@ -124,6 +125,30 @@ return home();
 ![https://dl.dropboxusercontent.com/u/774859/GitHub-Repos/flash/overlay.png](https://dl.dropboxusercontent.com/u/774859/GitHub-Repos/flash/overlay.png)
 
 > [Learn exactly how to build this very package on Laracasts!](https://laracasts.com/lessons/flexible-flash-messages)
+
+## Localization Support
+
+This package supports Laravel's localization system out of the box to flash messages in multiple languages. Translation Strings can be defined using either method described in the [Localization Documentation](https://laravel.com/docs/master/localization#defining-translation-strings).  
+If no translation is defined for the passed message string in the current locale, the string itself is returned, as shown above.
+
+To add localization parameters to your message, you can use:
+
+```php
+flash('Hello, :name')->parameters(['name' => 'Jeffrey']);
+return view('/');
+```
+
+![https://dl.dropboxusercontent.com/s/ib8yiajny6x1sg0/Screen%20Shot%202017-03-22%20at%208.08.18%20PM.png?dl=0](https://dl.dropboxusercontent.com/s/ib8yiajny6x1sg0/Screen%20Shot%202017-03-22%20at%208.08.18%20PM.png?dl=0)
+
+You could then add, for example, a Spanish translation by creating `/resources/lang/es.json` with the content:
+```json
+{
+  "Hello, :name" : "Hola, :name"
+}
+```
+*Translations defined using short keys can also accept parameters.*
+
+You can also override the close button text in your modal overlays by defining a `closeButton` short key inside `/resources/lang/vendor/flash/{locale}/flash.php` where `{locale}` is your supported language(s). 
 
 ## Hiding Flash Messages
 

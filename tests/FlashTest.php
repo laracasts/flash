@@ -3,6 +3,7 @@
 use Laracasts\Flash\FlashNotifier;
 use Mockery as m;
 
+
 class FlashTest extends PHPUnit_Framework_TestCase {
 
     protected $session;
@@ -97,4 +98,26 @@ class FlashTest extends PHPUnit_Framework_TestCase {
         $this->flash->overlay('Overlay Message','Notice','danger');
     }
 
+    /** @test */
+    public function it_displays_flash_notifications_with_parameters()
+    {
+        $this->session->shouldReceive('flash')->with('flash_notification.message', 'messages.welcome');
+        $this->session->shouldReceive('flash')->with('flash_notification.title', 'Notice');
+        $this->session->shouldReceive('flash')->with('flash_notification.level', 'info');
+        $this->session->shouldReceive('flash')->with('flash_notification.params', ['name' => 'Jeffrey']);
+
+        $this->flash->message('messages.welcome')->parameters(['name' => 'Jeffrey']);
+    }
+
+    /** @test */
+    public function it_displays_flash_overlay_notifications_with_parameters()
+    {
+        $this->session->shouldReceive('flash')->with('flash_notification.message', 'messages.welcome');
+        $this->session->shouldReceive('flash')->with('flash_notification.title', 'Notice');
+        $this->session->shouldReceive('flash')->with('flash_notification.level', 'info');
+        $this->session->shouldReceive('flash')->with('flash_notification.overlay', true);
+        $this->session->shouldReceive('flash')->with('flash_notification.params', ['name' => 'Jeffrey']);
+
+        $this->flash->overlay('messages.welcome')->parameters(['name' => 'Jeffrey']);
+    }
 }
