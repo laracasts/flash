@@ -5,18 +5,18 @@ namespace Laracasts\Flash;
 class FlashNotifier
 {
     /**
-     * The session writer.
+     * The session store.
      *
      * @var SessionStore
      */
     protected $session;
 
     /**
-     * The message being flashed.
+     * The messages collection.
      *
-     * @var string
+     * @var \Illuminate\Support\Collection
      */
-    public $messages = [];
+    public $messages;
 
     /**
      * Create a new FlashNotifier instance.
@@ -26,128 +26,75 @@ class FlashNotifier
     function __construct(SessionStore $session)
     {
         $this->session = $session;
+        $this->messages = collect();
     }
 
     /**
      * Flash an information message.
      *
-     * @param  string $message
+     * @param  string|null $message
      * @return $this
      */
-    public function info($message)
+    public function info($message = null)
     {
-        $this->message($message, 'info');
-
-        return $this;
+        return $this->message($message, 'info');
     }
 
     /**
      * Flash a success message.
      *
-     * @param  string $message
+     * @param  string|null $message
      * @return $this
      */
     public function success($message = null)
     {
-        $this->message($message, 'success');
-
-        return $this;
+        return $this->message($message, 'success');
     }
 
     /**
      * Flash an error message.
      *
-     * @param  string $message
+     * @param  string|null $message
      * @return $this
      */
     public function error($message = null)
     {
-        $this->message($message, 'danger');
-
-        return $this;
+        return $this->message($message, 'danger');
     }
 
     /**
      * Flash a warning message.
      *
-     * @param  string $message
+     * @param  string|null $message
      * @return $this
      */
     public function warning($message = null)
     {
-        $this->message($message, 'warning');
-
-        return $this;
-    }
-
-    /**
-     * Flash an overlay modal.
-     *
-     * @param  string|null $message
-     * @param  string      $title
-     * @param  string      $level
-     * @return $this
-     */
-    public function overlay($message = null, $title = 'Notice', $level = 'info')
-    {
-        if ($message) {
-            $this->message($message, $level);
-        }
-
-        $overlay = true;
-
-        $this->updateLastMessage(compact('overlay', 'title', 'level'));
-
-        return $this;
-    }
-
-    /**
-     * Add an "important" flash to the session.
-     *
-     * @return $this
-     */
-    public function important()
-    {
-        $this->updateLastMessage(['important' => true]);
-
-        return $this;
+        return $this->message($message, 'warning');
     }
 
     /**
      * Flash a general message.
      *
-     * @param  string $message
-     * @param  string $level
+     * @param  string|null $message
+     * @param  string|null $level
      * @return $this
      */
-    public function message($message, $level = 'info')
+    public function message($message = null, $level = null)
     {
-        if (!$message) {
+        // If no message was provided, we should update
+        // the most recently added message.
+        if (! $message) {
             return $this->updateLastMessage(compact('level'));
         }
 
-        return $this->addMessage(compact('message', 'level'));
-    }
+        if (! $message instanceof Message) {
+            $message = new Message(compact('message', 'level'));
+        }
 
-    /**
-     * Flash a new message to the session.
-     *
-     * @param  array $message
-     * @return $this
-     */
-    protected function addMessage($message = [])
-    {
-        $defaults = [
-            'title' => '',
-            'important' => false,
-            'overlay' => false
-        ];
+        $this->messages->push($message);
 
-        $this->messages[] = array_merge($defaults, $message);
-
-        $this->flash();
-
-        return $this;
+        return $this->flash();
     }
 
     /**
@@ -158,9 +105,47 @@ class FlashNotifier
      */
     protected function updateLastMessage($overrides = [])
     {
-        $message = array_merge(array_pop($this->messages), $overrides);
+        $this->messages->last()->update($overrides);
 
-        $this->addMessage($message);
+        return $this;
+    }
+
+    /**
+     * Flash an overlay modal.
+     *
+     * @param  string|null $message
+     * @param  string      $title
+     * @return $this
+     */
+    public function overlay($message = null, $title = 'Notice')
+    {
+        if (! $message) {
+            return $this->updateLastMessage(['title' => $title, 'overlay' => true]);
+        }
+
+        return $this->message(
+            new OverlayMessage(compact('title', 'message'))
+        );
+    }
+
+    /**
+     * Add an "important" flash to the session.
+     *
+     * @return $this
+     */
+    public function important()
+    {
+        return $this->updateLastMessage(['important' => true]);
+    }
+
+    /**
+     * Clear all registered messages.
+     *
+     * @return $this
+     */
+    public function clear()
+    {
+        $this->messages = collect();
 
         return $this;
     }
@@ -171,16 +156,6 @@ class FlashNotifier
     protected function flash()
     {
         $this->session->flash('flash_notification', $this->messages);
-    }
-
-    /**
-     * Clear all registered messages.
-     *
-     * @return $this
-     */
-    public function clear()
-    {
-        $this->messages = [];
 
         return $this;
     }
