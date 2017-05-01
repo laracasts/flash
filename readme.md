@@ -17,6 +17,11 @@ Next, if using Laravel 5, include the service provider within your `config/app.p
     Laracasts\Flash\FlashServiceProvider::class,
 ];
 ```
+In case of "Class flash does not exist" error, add the following aliases in `config/app.php`.
+```php
+'aliases' => [
+    'Flash' => Laracasts\Flash\Flash::class,
+    ],
 
 Finally, as noted above, the default CSS classes for your flash message are optimized for Twitter Bootstrap. As such, pull in the Bootstrap's CSS within your HTML or layout file.
 
