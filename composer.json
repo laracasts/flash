@@ -24,5 +24,15 @@
             "src/Laracasts/Flash/functions.php"
         ]
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Laracasts\\Flash\\FlashServiceProvider"
+            ],
+            "aliases": {
+                "Flash": "Laracasts\\Flash\\Flash"
+            }
+        }
+    }
 }
