@@ -121,7 +121,7 @@ return home();
 
 A common desire is to display a flash message for a few seconds, and then hide it. To handle this, write a simple bit of JavaScript. For example, using jQuery, you might add the following snippet just before the closing `</body>` tag.
 
-```
+```html
 <script>
 $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
 </script>
