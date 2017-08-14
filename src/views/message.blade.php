@@ -26,7 +26,7 @@
 
 {{ session()->forget('flash_notification') }}
 
-@if(isset($errors))
+@if($errors->all())
     <div class="alert alert-danger" role="alert">
         <button type="button"
             class="close"
