@@ -108,7 +108,7 @@ return home();
 ![https://dl.dropboxusercontent.com/u/774859/GitHub-Repos/flash/error.png](https://dl.dropboxusercontent.com/u/774859/GitHub-Repos/flash/error.png)
 
 ```php
-flash()->overlay('You are now a Laracasts member!', 'Yay');
+flash()->overlay('You are now a Laracasts member!', 'Notice');
 
 return home();
 ```
