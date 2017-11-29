@@ -30,8 +30,10 @@ class FlashServiceProvider extends ServiceProvider
             return $this->app->make('Laracasts\Flash\FlashNotifier');
         });
         
-        RedirectResponse::macro('withFlash', function ($message, $level = 'info') {
-            app('flash')->message($message, $level);
+        RedirectResponse::macro('withFlash', function ($message = null, $level = 'info') {
+            if (!is_null($message)) {
+                app('flash')->message($message, $level);
+            }
             
             return $this;
         });
