@@ -26,7 +26,7 @@ class FlashNotifier
     function __construct(SessionStore $session)
     {
         $this->session = $session;
-        $this->messages = collect();
+        $this->messages = $session->get('flash_notification', collect());
     }
 
     /**
