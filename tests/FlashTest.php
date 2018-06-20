@@ -158,6 +158,16 @@ class FlashTest extends TestCase
         $this->assertCount(0, $this->flash->messages);
     }
 
+    /** @test */
+    function it_is_macroable()
+    {
+        $this->flash->macro('passthru', function ($message) {
+            return $message;
+        });
+
+        $this->assertEquals('Macroable Message', $this->flash->passthru('Macroable Message'));
+    }
+
     protected function assertSessionIsFlashed($times = 1)
     {
         $this->session
