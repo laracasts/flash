@@ -33,6 +33,20 @@ class Message implements \ArrayAccess
     public $important = false;
 
     /**
+     * Whether the message should be dismissible.
+     *
+     * @var bool
+     */
+    public $dismissible = false;
+
+    /**
+     * Whether the message should be fixed.
+     *
+     * @var bool
+     */
+    public $fixed = false;
+
+    /**
      * Whether the message is an overlay.
      *
      * @var bool
