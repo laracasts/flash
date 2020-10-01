@@ -34,18 +34,7 @@ class FlashNotifier
     }
 
     /**
-     * Flash an information message.
-     *
-     * @param  string|null $message
-     * @return $this
-     */
-    public function info($message = null)
-    {
-        return $this->message($message, 'info');
-    }
-
-    /**
-     * Flash a success message.
+     * Flash a success style message.
      *
      * @param  string|null $message
      * @return $this
@@ -56,7 +45,18 @@ class FlashNotifier
     }
 
     /**
-     * Flash an error message.
+     * Flash a warning style message.
+     *
+     * @param  string|null $message
+     * @return $this
+     */
+    public function warning($message = null)
+    {
+        return $this->message($message, 'warning');
+    }
+
+    /**
+     * Flash a error style message.
      *
      * @param  string|null $message
      * @return $this
@@ -67,14 +67,69 @@ class FlashNotifier
     }
 
     /**
-     * Flash a warning message.
+     * Flash a danger style message.
      *
      * @param  string|null $message
      * @return $this
      */
-    public function warning($message = null)
+    public function danger($message = null)
     {
-        return $this->message($message, 'warning');
+        return $this->message($message, 'danger');
+    }
+
+    /**
+     * Flash a information style message.
+     *
+     * @param  string|null $message
+     * @return $this
+     */
+    public function info($message = null)
+    {
+        return $this->message($message, 'info');
+    }
+
+    /**
+     * Flash a primary style message.
+     *
+     * @param  string|null $message
+     * @return $this
+     */
+    public function primary($message = null)
+    {
+        return $this->message($message, 'primary');
+    }
+
+    /**
+     * Flash a secondary style message.
+     *
+     * @param  string|null $message
+     * @return $this
+     */
+    public function secondary($message = null)
+    {
+        return $this->message($message, 'secondary');
+    }
+
+    /**
+     * Flash an light style message.
+     *
+     * @param  string|null $message
+     * @return $this
+     */
+    public function light($message = null)
+    {
+        return $this->message($message, 'light');
+    }
+
+    /**
+     * Flash a dark style message.
+     *
+     * @param  string|null $message
+     * @return $this
+     */
+    public function dark($message = null)
+    {
+        return $this->message($message, 'dark');
     }
 
     /**
@@ -140,6 +195,26 @@ class FlashNotifier
     public function important()
     {
         return $this->updateLastMessage(['important' => true]);
+    }
+
+    /**
+     * Add an "dismissible" flash to the session.
+     *
+     * @return $this
+     */
+    public function dismissible()
+    {
+        return $this->updateLastMessage(['dismissible' => true]);
+    }
+
+    /**
+     * Add an "fixed" flash to the session.
+     *
+     * @return $this
+     */
+    public function fixed()
+    {
+        return $this->updateLastMessage(['fixed' => true]);
     }
 
     /**

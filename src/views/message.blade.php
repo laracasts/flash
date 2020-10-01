@@ -6,21 +6,13 @@
             'body'       => $message['message']
         ])
     @else
-        <div class="alert
-                    alert-{{ $message['level'] }}
-                    {{ $message['important'] ? 'alert-important' : '' }}"
-                    role="alert"
-        >
-            @if ($message['important'])
-                <button type="button"
-                        class="close"
-                        data-dismiss="alert"
-                        aria-hidden="true"
-                >&times;</button>
-            @endif
-
-            {!! $message['message'] !!}
-        </div>
+        @include('flash::alert', [
+            'level'         => $message['level'],
+            'message'       => $message['message'],
+            'dismissible'   => $message['dismissible'],
+            'fixed'     => $message['fixed'],
+            'important'     => $message['important']
+        ])
     @endif
 @endforeach
 
