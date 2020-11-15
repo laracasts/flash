@@ -89,23 +89,17 @@ flash('Welcome Aboard!');
 return home();
 ```
 
-![https://dl.dropboxusercontent.com/u/774859/GitHub-Repos/flash/message.png](https://dl.dropboxusercontent.com/u/774859/GitHub-Repos/flash/message.png)
-
 ```php
 flash('Sorry! Please try again.')->error();
 
 return home();
 ```
 
-![https://dl.dropboxusercontent.com/u/774859/GitHub-Repos/flash/error.png](https://dl.dropboxusercontent.com/u/774859/GitHub-Repos/flash/error.png)
-
 ```php
 flash()->overlay('You are now a Laracasts member!', 'Yay');
 
 return home();
 ```
-
-![https://dl.dropboxusercontent.com/u/774859/GitHub-Repos/flash/overlay.png](https://dl.dropboxusercontent.com/u/774859/GitHub-Repos/flash/overlay.png)
 
 > [Learn exactly how to build this very package on Laracasts!](https://laracasts.com/lessons/flexible-flash-messages)
 
