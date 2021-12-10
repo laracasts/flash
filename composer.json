@@ -9,12 +9,12 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
+        "php": "^8.0|^8.1",
         "illuminate/support": "~5.0|^6.0|^7.0|^8.0"
     },
     "require-dev": {
         "mockery/mockery": "dev-master",
-        "phpunit/phpunit": "^6.1"
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-0": {

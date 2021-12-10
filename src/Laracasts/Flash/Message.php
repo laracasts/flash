@@ -73,7 +73,7 @@ class Message implements \ArrayAccess
      * @param  mixed $offset
      * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->$offset);
     }
@@ -84,7 +84,7 @@ class Message implements \ArrayAccess
      * @param  mixed $offset
      * @return mixed
      */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->$offset;
     }
@@ -95,7 +95,7 @@ class Message implements \ArrayAccess
      * @param  mixed $offset
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, $value): void
     {
         $this->$offset = $value;
     }
@@ -106,7 +106,7 @@ class Message implements \ArrayAccess
      * @param  mixed $offset
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         //
     }
