@@ -9,7 +9,7 @@ class FlashTest extends TestCase
 
     protected $flash;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->session = Mockery::spy('Laracasts\Flash\SessionStore');
 
