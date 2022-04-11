@@ -15,7 +15,7 @@
                 @if ($message['important'])
                     <button type="button"
                             class="btn-close"
-                            data-dismiss="alert"
+                            data-bs-dismiss="alert"
                             aria-label="close"
                     ></button>
                 @endif
@@ -23,7 +23,7 @@
         @else
             <div class="alert alert-{{ $message['level'] }}
                     {{ $message['important'] ? 'alert-important' : '' }}"
-                    role="alert">
+            role="alert">
             @if ($message['important'])
                 <button type="button"
                         class="close"
@@ -31,7 +31,6 @@
                         aria-hidden="true"
                 >&times;</button>
             @endif
-
             {!! $message['message'] !!}
             </div>
         @endif
