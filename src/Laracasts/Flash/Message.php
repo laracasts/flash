@@ -33,6 +33,12 @@ class Message implements \ArrayAccess
     public $important = false;
 
     /**
+     * bootstrap 5 support.
+     *
+     * @var bool
+     */
+    public $bs5 = false;
+    /**
      * Whether the message is an overlay.
      *
      * @var bool
