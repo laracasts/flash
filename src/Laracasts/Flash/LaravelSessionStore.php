@@ -31,4 +31,16 @@ class LaravelSessionStore implements SessionStore
     {
         $this->session->flash($name, $data);
     }
+
+    /**
+     * Get an item from the session.
+     *
+     * @param  string $key
+     * @param  mixed  $default
+     * @return mixed
+     */
+    public function get($key, $default = null)
+    {
+        return $this->session->get($key, $default);
+    }
 }
