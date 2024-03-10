@@ -159,9 +159,16 @@ class FlashNotifier
      */
     protected function flash()
     {
-        $this->session->flash('flash_notification', $this->messages);
+      $notifications = session('flash_notification', collect());
+      if( $this->messages->count() > 0 ) {
+          foreach( $this->messages as $message ) {
+              $notifications->push($message);
+          }
+      }
 
-        return $this;
+      $this->session->flash('flash_notification', $notifications->unique());
+
+      return $this;
     }
 }
 
