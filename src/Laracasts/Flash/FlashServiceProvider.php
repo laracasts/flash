@@ -25,9 +25,11 @@ class FlashServiceProvider extends ServiceProvider
             'Laracasts\Flash\LaravelSessionStore'
         );
 
-        $this->app->singleton('flash', function () {
-            return $this->app->make('Laracasts\Flash\FlashNotifier');
+        $this->app->singleton('Laracasts\Flash\FlashNotifier', function ($app) {
+            return new FlashNotifier($app->make('Laracasts\Flash\SessionStore'));
         });
+
+        $this->app->alias('Laracasts\Flash\FlashNotifier', 'flash');
     }
 
     /**
