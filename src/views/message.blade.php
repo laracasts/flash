@@ -19,7 +19,7 @@
                 >&times;</button>
             @endif
 
-            {!! $message['message'] !!}
+            <div class="flash-message">{!! $message['message'] !!}</div>
         </div>
     @endif
 @endforeach
