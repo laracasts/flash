@@ -67,6 +67,17 @@ class FlashNotifier
     }
 
     /**
+     * Flash a danger message.
+     *
+     * @param  string|null $message
+     * @return $this
+     */
+    public function danger($message = null)
+    {
+        return $this->message($message, 'danger');
+    }
+
+    /**
      * Flash a warning message.
      *
      * @param  string|null $message
