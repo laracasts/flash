@@ -141,6 +141,16 @@ class FlashNotifier
     {
         return $this->updateLastMessage(['important' => true]);
     }
+    
+    /**
+     * set base css to bootstrap 5.
+     *
+     * @return $this
+     */
+    public function bs5()
+    {
+        return $this->updateLastMessage(['bootstrap5' => true]);
+    }
 
     /**
      * Clear all registered messages.
