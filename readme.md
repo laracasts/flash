@@ -2,6 +2,10 @@
 
 This composer package offers a Twitter Bootstrap optimized flash messaging setup for your Laravel applications.
 
+## :film_strip: Video Tutorial 
+
+ [<img src="https://img.youtube.com/vi/W3JbMAK9x0c/0.jpg" width="250">](https://youtu.be/W3JbMAK9x0c)
+ 
 ## Installation
 
 Begin by pulling in the package through Composer.
